@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Locations</title>
+  <link rel="stylesheet" href="./index.css" />
+</head>
+<body>
+  <div class="nav">
+    <p>Rochester</p>
+    <a href="Liang_WebApp.html" class="homeLink">Home</a>
+    <a href="Saved.html" class="homeLink">Saved</a>
+  </div>
+
+  <p class="pSaved">Saved Lists</p>
+
+  <div class="grid-container"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+      const gridContainer = document.querySelector(".grid-container");
+
+      if (savedLocations.length === 0) {
+        gridContainer.innerHTML = "<p>No saved locations.</p>";
+      } else {
+        savedLocations.forEach(location => {
+          const locationDiv = document.createElement("div");
+          locationDiv.classList.add("location");
+
+          const img = document.createElement("img");
+          img.src = location.image;
+          img.alt = `${location.title} image`;
+          img.style.width = "100%";
+          locationDiv.appendChild(img);
+
+          // Add title
+          const title = document.createElement("h3");
+          title.textContent = location.title;
+          locationDiv.appendChild(title);
+
+           // Create cost and review
+           const descriptionWrapper = document.createElement("div");
+          descriptionWrapper.style.display = "flex";
+          descriptionWrapper.style.justifyContent = "space-around";
+          descriptionWrapper.style.gap = "280px";
+
+          // Add cost
+          const cost = document.createElement("p");
+          cost.textContent = `Cost: ${location.cost}`;
+          descriptionWrapper.appendChild(cost);
+
+          // Add review
+          const review = document.createElement("p");
+          review.textContent = `Review: ${location.review}`;
+          descriptionWrapper.appendChild(review);
+
+          locationDiv.appendChild(descriptionWrapper);
+
+          // Add address
+          const address = document.createElement("p");
+          address.textContent = `Address: ${location.address}`;
+          locationDiv.appendChild(address);
+
+          gridContainer.appendChild(locationDiv);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
