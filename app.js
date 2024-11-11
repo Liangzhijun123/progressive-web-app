@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const gridContainer = document.querySelector(".grid-container");
   
-    // Fetch the JSON data
     async function loadLocationsData() {
       try {
         const response = await fetch("locationsData.json");
@@ -12,16 +11,15 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
   
-    // Display locations in grid container
     function displayLocations(locations) {
+      gridContainer.innerHTML = ''; 
       locations.forEach((location) => {
         const locationDiv = document.createElement("div");
         locationDiv.classList.add("location");
-  
-        // Populate location data into locationDiv
+        
         const img = document.createElement("img");
         img.src = location.image;
-        img.style.width = "100%";
+        img.alt = location.title;
         locationDiv.appendChild(img);
   
         const title = document.createElement("h3");

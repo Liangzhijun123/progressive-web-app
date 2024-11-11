@@ -1,4 +1,3 @@
-// sw.js
 
 const CACHE_NAME = "attractions-cache";
 const STATIC_ASSETS = [
@@ -14,7 +13,6 @@ const STATIC_ASSETS = [
   "/styles.css"
 ];
 
-// Install event
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -23,7 +21,6 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Activate event
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -36,7 +33,6 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch event to serve from cache and handle JSON requests
 self.addEventListener("fetch", (event) => {
   if (event.request.url.endsWith("locationsData.json")) {
     event.respondWith(
